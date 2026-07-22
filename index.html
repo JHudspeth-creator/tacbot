@@ -15,6 +15,10 @@
             --accent-hover: #6366f1;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        /* Smooth scrolling configuration */
+        html { scroll-behavior: smooth; }
+        
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
@@ -55,6 +59,10 @@
             cursor: pointer;
         }
         .btn:hover { background-color: var(--accent-hover); }
+        
+        /* Layout Padding Adjustments for Sticky Nav anchors */
+        section { scroll-margin-top: 80px; }
+        
         .hero { max-width: 1200px; margin: 0 auto; padding: 80px 24px; display: grid; grid-template-columns: 1fr; gap: 48px; }
         @media (min-width: 1024px) { .hero { grid-template-columns: 1fr 1fr; align-items: center; } }
         .hero-left { display: flex; flex-direction: column; gap: 24px; }
@@ -85,6 +93,7 @@
         }
         input[type="email"]:focus { outline: 2px solid var(--accent); }
         .subtext { font-size: 12px; color: #64748b; margin-top: -8px; }
+        
         .hero-right { position: relative; }
         .mockup {
             background-color: #020617;
@@ -97,10 +106,11 @@
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
         .window-dots { display: flex; gap: 8px; border-bottom: 1px solid #1e293b; padding-bottom: 16px; margin-bottom: 16px; align-items: center; }
-        .dot { width: 12px; h: 12px; width: 12px; height: 12px; border-radius: 50%; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
         .dot.r { background-color: #ef4444; } .dot.y { background-color: #eab308; } .dot.g { background-color: #22c55e; }
         .window-title { font-family: sans-serif; font-size: 12px; color: #64748b; margin-left: 16px; }
         .c-comment { color: #64748b; } .c-import { color: #34d399; } .c-string { color: #fcd34d; } .c-white { color: #fff; }
+        
         .features-section { border-top: 1px solid #1e293b; background: rgba(30, 41, 59, 0.2); padding: 80px 24px; }
         .features-container { max-width: 1200px; margin: 0 auto; }
         .features-header { text-align: center; max-width: 600px; margin: 0 auto 64px auto; display: flex; flex-direction: column; gap: 16px; }
@@ -113,6 +123,21 @@
         .card-icon { font-size: 24px; margin-bottom: 16px; }
         .card h3 { font-size: 20px; color: #fff; margin-bottom: 8px; }
         .card p { color: var(--text-muted); font-size: 14px; }
+
+        /* 5. PRICING SECTION STYLING */
+        .pricing-section { border-top: 1px solid #1e293b; background: #0f172a; padding: 80px 24px; }
+        .pricing-container { max-width: 900px; margin: 0 auto; }
+        .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-top: 48px; }
+        @media (min-width: 768px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+        .price-card { background: #1e293b; border: 2px solid #334155; padding: 40px 32px; border-radius: 24px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .price-card.featured { border-color: var(--accent); box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.3); }
+        .price-card .popular-badge { position: absolute; top: -16px; right: 24px; background: var(--accent); color: white; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: bold; }
+        .price-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .price-amount { font-size: 36px; font-weight: 800; color: #fff; margin-bottom: 16px; }
+        .price-amount span { font-size: 16px; color: var(--text-muted); font-weight: 400; }
+        .price-features { list-style: none; margin-bottom: 32px; }
+        .price-features li { color: var(--text-muted); font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .price-features li::before { content: "✓"; color: #34d399; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -122,6 +147,7 @@
         <div class="nav-container">
             <a href="#" class="logo">⚡ Tacbot</a>
             <nav class="nav-links">
+                <!-- href values match the section ID names precisely -->
                 <a href="#features">Features</a>
                 <a href="#demo">Demo</a>
                 <a href="#pricing">Pricing</a>
@@ -134,13 +160,13 @@
 
     <!-- 2. HERO SECTION -->
     <main>
-        <section class="hero">
+        <section class="hero" id="signup">
             <div class="hero-left">
                 <div class="badge">🚀 Now in Private Beta</div>
                 <h1>Automate Your Cisco Infrastructure <span>With AI Clarity</span></h1>
                 <p class="hero-p">Tacbot bridges the gap between CCNP network engineering and Python automation. Generate Netmiko scripts, validate RESTCONF payloads, and fix production bugs in seconds.</p>
                 
-                <div id="signup">
+                <div>
                     <form class="form-group">
                         <input type="email" placeholder="Enter your work email" required>
                         <button type="submit" class="btn">Join Waitlist</button>
@@ -149,7 +175,7 @@
                 </div>
             </div>
             
-            <!-- 3. INTERACTIVE MOCKUP -->
+            <!-- 3. INTERACTIVE MOCKUP (DEMO ANCHOR TARGET) -->
             <div class="hero-right" id="demo">
                 <div class="mockup">
                     <div class="window-dots">
@@ -169,35 +195,3 @@
                     <p style="color:#818cf8; font-weight:600; margin-top:8px;">✨ Script optimized successfully.</p>
                 </div>
             </div>
-        </section>
-
-        <!-- 4. CORE FEATURES GRID -->
-        <section id="features" class="features-section">
-            <div class="features-container">
-                <div class="features-header">
-                    <h2>Built Specifically for NetDevOps</h2>
-                    <p>Generic AI tools don't understand structural network constraints. Tacbot is fine-tuned to know exactly how Cisco systems execute code.</p>
-                </div>
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-icon">🛠️</div>
-                        <h3>Instant Netmiko Boilerplates</h3>
-                        <p>Stop copying SSH setup logic. Tell Tacbot your topology details and grab complete, executable Python files instantly.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">📡</div>
-                        <h3>RESTCONF API Validation</h3>
-                        <p>Drop your JSON or XML payloads right into the chat. Tacbot validates them cleanly against standard YANG schemas before you push live.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">🎓</div>
-                        <h3>CCNP ENAUTO Sandbox</h3>
-                        <p>Learn while you build. Tacbot breaks down exactly *why* a specific automation library call or HTTP header parameter was chosen.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-</body>
-</html>
