@@ -132,7 +132,8 @@ def run_chat_turn(user_query, network_data, vendor_name):
         else:
             messages.append({"role": "user", "content": user_query})
             
-        response = ai_client.chat.completions.create(model="llama-3.1-8b-instant", messages=messages)
+                # ✅ UPGRADED: Changed to 70B model to cleanly handle your massive Meraki fleet data size
+        response = ai_client.chat.completions.create(model="llama-3.3-70b-specgroq", messages=messages)
         # ✅ FIXED: Added correct list bracket indexing to support the Groq completions schema natively
         return response.choices[0].message.content
     except Exception as e:
