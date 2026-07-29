@@ -232,7 +232,8 @@ elif st.session_state["current_vendor"] == "Meraki":
                                     network_uplink_issues[net_friendly_name].extend(broken_links)
                                 if net_friendly_name not in network_samples: network_samples[net_friendly_name] = []
                                 if len(network_samples[net_friendly_name]) < 5: network_samples[net_friendly_name].append(dev_name)
-                        sorted_bad = sorted(network_counts.items(), key=lambda x: x, reverse=True)
+                                                # ✅ FIXED: Changed index from x to x[1] to explicitly sort by numerical device count, not alphabetically
+                        sorted_bad = sorted(network_counts.items(), key=lambda x: x[1], reverse=True)
                         leaderboard = [{"network_name": n, "offline_device_count": c, "known_uplink_circuit_failures": list(set(network_uplink_issues.get(n, ["Clear"]))), "sample_down_devices": network_samples.get(n, [])} for n, c in sorted_bad[:5]]
                         st.session_state["cached_telemetry"] = {"mode": "org_summary", "total_organization_devices": len(raw_device_data), "total_currently_offline": total_offline, "top_networks_with_most_down_devices": leaderboard}
                     status_box.update(label="✅ Global Topography Loaded", state="complete", expanded=False)
