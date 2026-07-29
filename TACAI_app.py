@@ -105,7 +105,7 @@ def run_chat_turn(user_query, network_data, vendor_name):
         if not MY_GROQ_KEY or MY_GROQ_KEY == "PASTE_YOUR_GSK_KEY_HERE":
             return "⚠️ **System Notification:** Counterpart Core offline. Groq API Key missing on Line 11."
         
-        ai_client = Groq(api_key=MY_GROQ_KEY)
+        ai_client = Groq(api_key=GROQ_API_KEY)
         
         system_prompt = (
             f"You are MyTacBot, an elite Tier-3 Senior Principal Network Automation Engineer acting as a troubleshooting co-pilot. "
