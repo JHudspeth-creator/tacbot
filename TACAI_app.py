@@ -102,10 +102,14 @@ def navigate_to(page_name):
 # --- THE CO-PILOT ENGINEER BRAIN ---
 def run_chat_turn(user_query, network_data, vendor_name):
     try:
-        if not MY_GROQ_KEY or MY_GROQ_KEY == "PASTE_YOUR_GSK_KEY_HERE":
+        # ✅ Reference the working global variable from line 11
+        global groq_api_key
+        
+        if not groq_api_key:
             return "⚠️ **System Notification:** Counterpart Core offline. Groq API Key missing on Line 11."
         
-        ai_client = Groq(api_key=GROQ_API_KEY)
+        # ✅ Use the small lowercase variable that holds the actual text key string
+        ai_client = Groq(api_key=groq_api_key)
         
         system_prompt = (
             f"You are MyTacBot, an elite Tier-3 Senior Principal Network Automation Engineer acting as a troubleshooting co-pilot. "
